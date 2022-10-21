@@ -27,10 +27,12 @@ export default function TicketsList() {
     </button>
   )
 
+  const noTickets = <div className={styles.noTickets}>Рейсов, подходящих под заданные фильтры, не найдено</div>
+
   return (
     <ul className={styles.list}>
       {limitedTickets}
-      {limitedTickets.length > 0 ? moreButton : null}
+      {limitedTickets.length > 0 ? moreButton : noTickets}
     </ul>
   )
 }
