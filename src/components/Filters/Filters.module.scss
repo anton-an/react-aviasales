@@ -1,0 +1,70 @@
+@use '../../variables';
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  max-height: 260px;
+  min-width: 230px;
+  background-color: variables.$color-white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  margin: 20px 0 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  font-size: 12px;
+}
+
+.label:hover {
+  background-color: variables.$color-blue-light;
+}
+
+.checkbox {
+  appearance: none;
+  margin: 0 15px 0 15px;
+}
+
+.checkbox::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid variables.$color-checkbox-inactive;
+  border-radius: 2px;
+}
+
+.checkbox:checked::before {
+  content: '';
+  border: 1px solid variables.$color-blue-main;
+  background: url('./Shape.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .filters {
+    margin: 16px;
+    min-height: 200px;
+    max-height: 240px;
+    align-content: center;
+  }
+  .header {
+    margin: 10px 0 10px 0;
+  }
+  .label {
+    margin-left: auto;
+    height: 30px;
+  }
+}

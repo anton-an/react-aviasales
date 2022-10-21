@@ -1,0 +1,36 @@
+@use '../../variables.scss';
+
+.info {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.tableHeader {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: variables.$color-text-light;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.destination {
+  width: 33%;
+}
+
+.totalTitle {
+  width: 33%;
+}
+
+.transferTitle {
+  width: 33%;
+}
+
+.price {
+  font-size: 24px;
+  margin: 0;
+  color: #2196f3;
+}

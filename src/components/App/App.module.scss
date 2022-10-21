@@ -1,0 +1,30 @@
+@use '../../variables';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 50px;
+  min-height: 100vh;
+  width: 100vw;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  background-color: variables.$color-background;
+  color: variables.$color-text-dark;
+}
+
+.logo {
+  margin: 30px auto;
+}
+
+.content {
+  display: flex;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+}

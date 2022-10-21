@@ -1,0 +1,33 @@
+@use '../../variables.scss';
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ticket {
+  margin: 0 0 20px 0;
+  padding: 16px;
+  font-size: 14px;
+  background-color: variables.$color-white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.moreButton {
+  padding: 15px;
+  width: 100%;
+  font-size: 14px;
+  text-transform: uppercase;
+  border: none;
+  color: variables.$color-white;
+  background-color: variables.$color-blue-main;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .list {
+    margin: 16px;
+  }
+}
