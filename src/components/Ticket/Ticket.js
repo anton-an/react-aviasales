@@ -35,7 +35,7 @@ export default function Ticket({ ticket }) {
           <tr className={styles.tableRow}>
             <td className={styles.dates}>{flightPeriod}</td>
             <td className={styles.total}>{flightTime}</td>
-            <td className={styles.transfers}>{stops}</td>
+            <td className={styles.transfers}>{stops.join(', ')}</td>
           </tr>
         </tbody>
       </table>
