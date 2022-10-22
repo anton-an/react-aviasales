@@ -18,7 +18,6 @@ export default function TicketsList() {
         <Ticket ticket={ticket} />
       </li>
     ))
-    console.log(limitedTickets)
   }
 
   const moreButton = (
