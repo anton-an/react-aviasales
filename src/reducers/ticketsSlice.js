@@ -44,6 +44,7 @@ const ticketsSlice = createSlice({
     setOfflineStatus: (state, action) => {
       state.isOffline = action.payload
       state.isLoading = false
+      state.error = null
     },
   },
   extraReducers: {
