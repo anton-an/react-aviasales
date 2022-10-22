@@ -3,5 +3,6 @@
 .tickets {
   display: flex;
   flex-direction: column;
+  min-width: 440px;
   margin: 0;
 }
