@@ -6,7 +6,7 @@
   margin-right: 20px;
   min-height: 260px;
   max-height: 260px;
-  min-width: 230px;
+  min-width: 300px;
   background-color: variables.$color-white;
   border-radius: 5px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
@@ -57,6 +57,8 @@
 @media screen and (max-width: 768px) {
   .filters {
     margin: 16px;
+    box-sizing: border-box;
+    min-width: 286px;
     min-height: 200px;
     max-height: 240px;
     align-content: center;
