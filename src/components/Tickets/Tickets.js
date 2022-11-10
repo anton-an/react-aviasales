@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 
-import Spinner from '../Spinner'
 import TicketsList from '../TicketsList'
 import Error from '../Error'
 import SortList from '../SortList'
@@ -12,7 +11,7 @@ export default function Tickets() {
   return (
     <section className={styles.tickets}>
       <SortList />
-      {isLoading ? <Spinner /> : null}
+      {isLoading ? <div className={styles.spinner} /> : null}
       {error ? (
         <Error>
           <p className={styles.errorText}>{`${error.message}. ${isOffline ? 'Нет интернета' : ''}`}</p>

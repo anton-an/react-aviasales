@@ -12,7 +12,7 @@ import Logo from './logo.svg'
 function App() {
   const dispatch = useDispatch()
   const { idRecieved } = useSelector((state) => state.tickets)
-  const { ticketsData, done, isServerError } = useSelector((state) => state.tickets)
+  const { ticketsData, done, serverError } = useSelector((state) => state.tickets)
 
   useEffect(() => {
     if (!idRecieved) {
@@ -21,10 +21,10 @@ function App() {
   }, [dispatch, idRecieved])
 
   useEffect(() => {
-    if ((!done && idRecieved) || (!done && isServerError)) {
+    if (!done && idRecieved) {
       dispatch(fetchTicketsData())
     }
-  }, [dispatch, done, idRecieved, ticketsData, isServerError])
+  }, [dispatch, done, ticketsData, idRecieved, serverError])
 
   useEffect(() => {
     window.addEventListener('offline', () => dispatch(setOfflineStatus(true)))
