@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchSearchId, fetchTicketsData, setOfflineStatus } from '../../reducers/ticketsSlice'
+import { fetchTicketsData, setStatus, resetTickets } from '../../reducers/ticketsSlice'
+import { fetchSearchId, selectSearchId } from '../../reducers/searchIdSlice'
 import Filters from '../Filters'
 import Tickets from '../Tickets'
 
@@ -11,25 +12,26 @@ import Logo from './logo.svg'
 
 function App() {
   const dispatch = useDispatch()
-  const { idRecieved } = useSelector((state) => state.tickets)
-  const { ticketsData, done, serverError } = useSelector((state) => state.tickets)
+  const searchId = useSelector(selectSearchId)
+  const { ticketsData, stop, status } = useSelector((state) => state.tickets)
 
   useEffect(() => {
-    if (!idRecieved) {
+    if (!searchId.id && searchId.status !== 'failed' && status !== 'offline') {
       dispatch(fetchSearchId())
     }
-  }, [dispatch, idRecieved])
+  }, [dispatch, searchId, searchId.status, status])
 
   useEffect(() => {
-    if (!done && idRecieved) {
-      dispatch(fetchTicketsData())
+    if (searchId.id && !stop && status === 'idle') {
+      dispatch(fetchTicketsData(searchId.id))
     }
-  }, [dispatch, done, ticketsData, idRecieved, serverError])
+  }, [dispatch, searchId, ticketsData, status, stop])
 
   useEffect(() => {
-    window.addEventListener('offline', () => dispatch(setOfflineStatus(true)))
+    window.addEventListener('offline', () => dispatch(setStatus('offline')))
     window.addEventListener('online', () => {
-      dispatch(setOfflineStatus(false))
+      dispatch(resetTickets())
+      dispatch(setStatus('idle'))
     })
   }, [dispatch])
 

@@ -8,18 +8,8 @@ import { selectFilters } from './filtersSlice'
 import { selectActiveSortId } from './sortSlice'
 
 const aviasalesApi = new AviasalesApiService()
-let searchId = null
 
-const fetchSearchId = createAsyncThunk('tickets/getSearchId', async (_, { rejectWithValue }) => {
-  const response = await aviasalesApi.getSearchId()
-  try {
-    return response.searchId
-  } catch (error) {
-    return rejectWithValue(error)
-  }
-})
-
-const fetchTicketsData = createAsyncThunk('tickets/getTicketsData', async (_, { rejectWithValue }) => {
+const fetchTicketsData = createAsyncThunk('tickets/getTicketsData', async (searchId, { rejectWithValue }) => {
   const response = await aviasalesApi.getTickets(searchId)
   try {
     return await response
@@ -30,10 +20,9 @@ const fetchTicketsData = createAsyncThunk('tickets/getTicketsData', async (_, { 
 
 const initialState = {
   ticketsData: [],
-  firstTicketsLoaded: false,
-  isLoading: false,
-  isDone: false,
-  serverError: 0,
+  status: 'idle',
+  stop: null,
+  errorsCounter: 0,
   error: null,
   idRecieved: false,
   isOffline: false,
@@ -43,40 +32,32 @@ const ticketsSlice = createSlice({
   name: 'tickets',
   initialState,
   reducers: {
-    setOfflineStatus: (state, action) => {
-      state.isOffline = action.payload
-      state.isLoading = false
-      state.error = null
+    setStatus: (state, action) => {
+      state.status = action.payload
+    },
+    resetTickets: (state) => {
+      state.ticketsData = []
     },
   },
   extraReducers: {
-    [fetchSearchId.pending]: (state) => {
-      state.error = null
-    },
-    [fetchSearchId.fulfilled]: (state, action) => {
-      searchId = action.payload
-      state.idRecieved = true
-    },
-    [fetchSearchId.rejected]: (state, action) => {
-      state.error = action.error
-    },
     [fetchTicketsData.pending]: (state) => {
-      state.error = null
-      state.isLoading = true
+      state.status = 'pending'
     },
     [fetchTicketsData.fulfilled]: (state, action) => {
+      if (state.status !== 'offline') {
+        state.status = 'idle'
+      }
       state.ticketsData.push(...action.payload.tickets)
-      state.done = action.payload.stop
-      state.isLoading = !action.payload.stop
-      state.error = null
-      state.firstTicketsLoaded = true
+      if (action.payload.stop) {
+        state.status = 'done'
+      }
+      state.errorsCounter = 0
     },
     [fetchTicketsData.rejected]: (state, action) => {
       if (action.error.message === '500') {
-        state.serverError += 1
+        state.status = 'idle'
       } else {
-        state.isLoading = false
-        state.error = action.error
+        state.status = 'failed'
       }
     },
   },
@@ -92,7 +73,7 @@ export const selectFilteredTickets = createSelector(
   }
 )
 
-export { fetchTicketsData, fetchSearchId }
-export const { setOfflineStatus } = ticketsSlice.actions
+export { fetchTicketsData }
+export const { setStatus, resetTickets } = ticketsSlice.actions
 
 export default ticketsSlice.reducer

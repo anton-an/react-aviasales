@@ -45,7 +45,11 @@ export default function Ticket({ ticket }) {
     <div>
       <header className={styles.header}>
         <h3 className={styles.price}>{`${ticket.price} Р`}</h3>
-        <img className={styles.companyLogo} src={`//pics.avs.io/99/36/${ticket.carrier}.png`} alt="company-logo" />
+        <img
+          className={styles.companyLogo}
+          src={`https://pics.avs.io/99/36/${ticket.carrier}.png`}
+          alt={`${ticket.carrier} logo`}
+        />
       </header>
       {ticketContent}
     </div>
