@@ -1,4 +1,4 @@
-export default function sortTicketss(sortIds, tickets) {
+export default function sortTickets(sortIds, tickets) {
   const allTickets = JSON.parse(JSON.stringify(tickets))
   sortIds.forEach((id) => {
     if (id === 'cheapest') {

@@ -1,5 +1,5 @@
 export default class AviasalesApiService {
-  url = 'https://aviasales-test-api.kata.academy'
+  url = 'https://front-test.dev.aviasales.ru'
 
   getSearchId = async () => {
     const response = await fetch(`${this.url}/search`)
