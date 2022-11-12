@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchTicketsData, setStatus, resetTickets } from '../../reducers/ticketsSlice'
-import { fetchSearchId, selectSearchId } from '../../reducers/searchIdSlice'
+import { fetchSearchId } from '../../reducers/searchIdSlice'
 import Filters from '../Filters'
 import Tickets from '../Tickets'
 
@@ -12,18 +12,19 @@ import Logo from './logo.svg'
 
 function App() {
   const dispatch = useDispatch()
-  const searchId = useSelector(selectSearchId)
+  const searchId = useSelector((state) => state.searchId.id)
+  const searchIdStatus = useSelector((state) => state.searchId.status)
   const { ticketsData, stop, status } = useSelector((state) => state.tickets)
 
   useEffect(() => {
-    if (!searchId.id && searchId.status !== 'failed' && status !== 'offline') {
+    if (!searchId && searchIdStatus !== 'pending' && status !== 'offline') {
       dispatch(fetchSearchId())
     }
-  }, [dispatch, searchId, searchId.status, status])
+  }, [dispatch, searchId, searchIdStatus, status])
 
   useEffect(() => {
-    if (searchId.id && !stop && status === 'idle') {
-      dispatch(fetchTicketsData(searchId.id))
+    if (searchId && !stop && status === 'idle') {
+      dispatch(fetchTicketsData(searchId))
     }
   }, [dispatch, searchId, ticketsData, status, stop])
 

@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import AviasalesApiService from '../services/AviasalesApi'
 
 const aviasalesApi = new AviasalesApiService()
-
 export const fetchSearchId = createAsyncThunk('search/getSearchId', async () => {
   const response = await aviasalesApi.getSearchId()
   return response.searchId
