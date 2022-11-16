@@ -3,7 +3,7 @@
 .tickets {
   display: flex;
   flex-direction: column;
-  min-width: 320px;
+  min-width: 425px;
   margin: 0;
 }
 
@@ -34,6 +34,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .tickets {
+    min-width: 320px;
+  }
   .spinner {
     margin: 16px auto 0 auto;
   }
