@@ -13,11 +13,7 @@ export default function TicketsList() {
 
   let limitedTickets = null
   if (tickets) {
-    limitedTickets = tickets.slice(0, ticketsLimit).map((ticket) => (
-      <li className={styles.ticket} key={nanoid()}>
-        <Ticket ticket={ticket} />
-      </li>
-    ))
+    limitedTickets = tickets.slice(0, ticketsLimit).map((ticket) => <Ticket ticket={ticket} key={nanoid()} />)
   }
 
   const moreButton = (

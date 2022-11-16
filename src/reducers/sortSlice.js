@@ -4,7 +4,7 @@ const initialState = {
   sortTypes: {
     cheapest: {
       label: 'Самый дешёвый',
-      isActive: false,
+      isActive: true,
     },
     fastest: {
       label: 'Самый быстрый',

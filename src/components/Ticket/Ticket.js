@@ -42,7 +42,7 @@ export default function Ticket({ ticket }) {
     )
   })
   return (
-    <div>
+    <li className={styles.ticket}>
       <header className={styles.header}>
         <h3 className={styles.price}>{`${ticket.price} Р`}</h3>
         <img
@@ -52,6 +52,6 @@ export default function Ticket({ ticket }) {
         />
       </header>
       {ticketContent}
-    </div>
+    </li>
   )
 }
